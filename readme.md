@@ -26,3 +26,14 @@ $ meteor --settings private/local-settings.json
 ```
 
 Your app will now be running at [http://localhost:3000](http://localhost:3000).
+
+### Deploy
+
+Create Facebook and Twitter apps for production environment. Create file at `private/prod-settings.json` with those app credentials.
+
+```
+$ meteor deploy YOURAPP.meteor.com --settings private/prod-settings.json
+```
+
+For more deployment options, see [http://docs.meteor.com/#/full/deploying](http://docs.meteor.com/#/full/deploying).
+
