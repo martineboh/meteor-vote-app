@@ -1,0 +1,85 @@
+	<head>
+		 <title>Vote App</title>
+		 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		 <link rel="shortcut icon" href="/vote.png">
+	</head>
+	<body>
+		<div class="wrapper">
+			{{> vote}}
+		</div>
+	</body>
+
+	<template name="vote">
+
+		{{ #if isAdmin }}
+			<h1 id="title" contenteditable>{{ title }}</h1>
+		{{ else }}
+			<h1 id="title">{{ title }}</h1>
+		{{ /if }}
+
+		<ul class="nominees">
+		{{ #each nominees }}
+			<li class="nominee">
+				<strong class="title">{{ this.name }}</strong>
+				<div class="info">
+				<strong class="votes">{{ this.votes }}</strong>
+				{{#if session "meteor_loggedin"}}
+					<div class="actions">
+						{{ #if canVoteDown }}
+							<button class="down vote-button" type="button"><i class="fa fa-arrow-down"></i></button>
+						{{ else }}
+							<button disabled class="down vote-button" type="button"><i class="fa fa-arrow-down"></i></button>
+						{{ /if }}
+
+						{{ #if canVoteUp }}
+							<button class="up vote-button" type="button"><i class="fa fa-arrow-up"></i></button>
+						{{ else }}
+							<button disabled class="up vote-button" type="button"><i class="fa fa-arrow-up"></i></button>
+						{{ /if }}
+					</div>
+				{{ /if }}
+				</div>
+				{{#if session "meteor_loggedin"}}
+				<div class="uservotes">
+					{{ userVotesForNominee }}
+				</div>
+				{{ /if }}
+			</li>
+		{{ /each }}
+		</ul>
+
+		{{#if session "meteor_loggedin"}}
+		<form id="form">
+			{{ #if canVote }}
+		<input placeholder="Nominate an option..." type="text" name="nomination" />
+		<button type="submit">Nominate <i class="fa fa-check-square-o"></i></button>
+			{{ else }}
+				<input disabled placeholder="Nominate an option..." type="text" name="nomination" />
+				<button disabled type="submit">Nominate <i class="fa fa-check-square-o"></i></button>
+			{{ /if }}
+		</form>
+
+
+		<h2 class="votesremaing">Votes remaining: <strong>{{ userVotes }}</strong></h2>
+
+
+		{{ /if }}
+
+		{{ #if isAdmin }}
+			<fieldset>
+				<legend><i class="fa fa-key"></i> Admin</legend>
+				<div>
+					<label for="numbervotes">Votes Per User</label>
+					<input  id="numbervotes" type="number" min="0" value="{{ votesPerUser }}" />
+				</div>
+
+				<div>
+					<button id="reset" type="button">Reset Ballot <i class="fa fa-undo"></i></button>
+				</div>
+
+			</fieldset>
+		{{ /if }}
+
+		{{> loginButtons}}
+
+	</template>
