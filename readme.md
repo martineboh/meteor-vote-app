@@ -37,3 +37,10 @@ $ meteor deploy YOURAPP.meteor.com --settings private/prod-settings.json
 
 For more deployment options, see [http://docs.meteor.com/#/full/deploying](http://docs.meteor.com/#/full/deploying).
 
+## Todo
+- [x] Add Twitter login
+- [ ] Add Google login
+- [ ] Hide results from user until all their votes have been cast
+- [ ] Show Admins all users who have cast votes (to discourage users from voting from multiple accounts)
+- [ ] Make ability to vote _against_ something adminable
+
