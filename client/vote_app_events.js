@@ -59,6 +59,19 @@ Template.vote.events({
 				Settings.insert({name : 'title', value : val});
 			}
 		}
+	},
+
+	'click .discardBallot' : function(){
+		if(Meteor.user().isAdmin){
+
+			console.log(this);
+
+			var answer = confirm("Are you sure you want to discard " + this.profile.name + "'s ballot?");
+
+			if(answer){
+				// @TODO Remove user's votes
+			}
+		}
 	}
 
 });

@@ -77,17 +77,24 @@
 
 
 	//
-	// Publish custom user attributes
+	// Publish isAdmin & votes field if searching by ID
 	Meteor.publish('userData', function() {
-	  if(!this.userId) return null;
-	  return Meteor.users.find(this.userId, {fields: {
-	    isAdmin: 1
-	  }});
+		if(!this.userId) return null;
+		return Meteor.users.find(this.userId, {fields: {
+			isAdmin: 1,
+			votes: 1
+		}});
 	});
 
+	//
+	// Publish votes and profileLink fields only to Admins
 	Meteor.publish("allUserData", function () {
-	    return Meteor.users.find({}, {fields: {
-		    votes: 1,
-		    profileLink: 1
-	    }});
+
+		var user = Meteor.users.findOne({_id : this.userId});
+		if(!user.isAdmin) return null;
+
+		return Meteor.users.find({}, {fields: {
+			votes: 1,
+			profileLink: 1
+		}});
 	});

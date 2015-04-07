@@ -68,14 +68,7 @@
 		{{ #if isAdmin }}
 			<fieldset>
 				<legend><i class="fa fa-key"></i> Admin</legend>
-				<div>
-					<label for="numbervotes">Votes Per User</label>
-					<input  id="numbervotes" type="number" min="0" value="{{ votesPerUser }}" />
-				</div>
 
-				<div>
-					<button id="reset" type="button">Reset Ballot <i class="fa fa-undo"></i></button>
-				</div>
 				<div class="voters">
 					<h2>Users who have voted:</h2>
 					<ul>
@@ -84,20 +77,31 @@
 								<li>
 									{{ #if this.services.facebook }}
 
-										<strong>{{ this.profile.name }}</strong> (<a href="{{ this.profileLink }}" target="_blank">Facebook</a>) <small>Votes Cast: <strong>{{votesCast this.votes }}</strong> </small>
+										<button class="remove discardBallot">&times;</button> <strong>{{ this.profile.name }}</strong> (<a href="{{ this.profileLink }}" target="_blank">Facebook</a>) <small class="votescast">Votes Cast: <strong>{{votesCast this.votes }}</strong></small>
 
 									{{else}} {{#if this.services.twitter }}
 
-										<strong>{{ this.profile.name }}</strong>(<a href="{{ this.profileLink }}" target="_blank">Twitter</a>) <small>Votes Cast: <strong>{{votesCast this.votes }}</strong> </small>
+										<button class="remove discardBallot">&times;</button> <strong>{{ this.profile.name }}</strong> (<a href="{{ this.profileLink }}" target="_blank">Twitter</a>) <small class="votescast">Votes Cast: <strong>{{votesCast this.votes }}</strong></small>
 									{{else}} {{#if this.services.google }}
 
-										<strong>{{ this.profile.name }}</strong> (<a href="mailto:{{ this.profileLink }}">Google</a>) <small>Votes Cast: <strong>{{votesCast this.votes }}</strong> </small>
+										<button class="remove discardBallot">&times;</button> <strong>{{ this.profile.name }}</strong> (<a href="mailto:{{ this.profileLink }}">Google</a>) <small class="votescast">Votes Cast: <strong>{{votesCast this.votes }}</strong></small>
 
 									{{/if}}{{/if}}{{/if}}
 								</li>
 							{{ /if }}
 						{{ /each }}
 					</ul>
+				</div>
+
+				<div class="form">
+					<div>
+						<label for="numbervotes">Votes Per User</label>
+						<input  id="numbervotes" type="number" min="0" value="{{ votesPerUser }}" />
+					</div>
+
+					<div>
+						<button id="reset" type="button">Reset Ballot <i class="fa fa-undo"></i></button>
+					</div>
 				</div>
 
 			</fieldset>
