@@ -11,7 +11,16 @@ Visit [https://developers.facebook.com](https://developers.facebook.com)  and se
 2. Set Callback URL to: http://127.0.0.1:3000/_oauth/twitter
 3. Select "Create your Twitter application".
 4. On the Settings tab, enable "Allow this application to be used to Sign in with Twitter" and click "Update settings".
-5. Switch to the "Keys and Access Tokens" tab. Enter values in `private/local-settings.json`.
+5. Switch to the "Keys and Access Tokens" tab. Enter values into `private/local-settings.json`.
+
+### Google
+1. Visit https://code.google.com/apis/console/
+2. "Create Project", if needed. Wait for Google to finish provisioning.
+3. On the left sidebar, go to "APIs & auth" and, underneath, "Consent Screen". Make sure to enter a product name, and save.
+4. On the left sidebar, go to "APIs & auth" and then, "Credentials". "Create New Client ID", then select "Web application" as the type.
+5. Set Authorized Javascript Origins to: http://localhost:3000/
+6. Set Authorized Redirect URI to: http://localhost:3000/_oauth/google
+7. Finish by clicking "Create Client ID". Enter values into `private/local-settings.json`.
 
 
 ### Set Admins
@@ -39,8 +48,8 @@ For more deployment options, see [http://docs.meteor.com/#/full/deploying](http:
 
 ## Todo
 - [x] Add Twitter login
-- [ ] Add Google login
+- [x] Add Google login
 - [ ] Hide results from user until all their votes have been cast
-- [ ] Show Admins all users who have cast votes (to discourage users from voting from multiple accounts)
+- [x] Show Admins all users who have cast votes (to discourage users from voting from multiple accounts)
 - [ ] Make ability to vote _against_ something adminable
 

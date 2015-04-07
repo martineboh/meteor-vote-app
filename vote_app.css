@@ -62,7 +62,7 @@
 	.nominees .uservotes p.up { background: #cf280e ; }
 
 
- 	#login-buttons { float: right; padding: 1em 0; }
+ 	#login-buttons { padding: 1em 0; }
  	.votesremaing { font-size: small; }
  	.votesremaing strong { font-size: larger; }
 

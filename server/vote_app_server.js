@@ -1,6 +1,6 @@
 
  //
- // Set up Twitter & Facebook Login on Startup
+ // Set up Facebook, Twitter & Google Login on Startup
 	Meteor.startup(function () {
 
 		Accounts.loginServiceConfiguration.remove({
@@ -11,19 +11,25 @@
 			service : 'twitter'
 		});
 
+		Accounts.loginServiceConfiguration.remove({
+			service : 'google'
+		});
+
 		Accounts.loginServiceConfiguration.insert(Meteor.settings.facebookSettings);
 		Accounts.loginServiceConfiguration.insert(Meteor.settings.twitterSettings);
+		Accounts.loginServiceConfiguration.insert(Meteor.settings.googleSettings);
 	});
 
   	//
   	// Server Methods
 	Meteor.methods({
-		checkUserAccess: function() {
+		onLogin: function() {
 			var admins =  JSON.parse(Assets.getText('admins.json')),
 				user = Meteor.user(),
 				isAdmin = user.services.facebook ? admins.indexOf(user.services.facebook.id) > -1 : false,
 				$set = {},
 				voteSetting = Settings.findOne({name : 'votesPerUser'});
+
 
 			if(!voteSetting){
 				Settings.insert({name : 'votesPerUser', value : 5});
@@ -32,6 +38,14 @@
 
 			if(typeof user.votes == 'undefined'){
 				$set.votes = voteSetting.value;
+			}
+
+			if(user.services.facebook){
+				$set.profileLink = user.services.facebook.link;
+			} else if(user.services.twitter){
+				$set.profileLink = 'http://www.twitter.com/' + user.services.twitter.screenName;
+			} else if(user.services.google){
+				$set.profileLink = user.services.google.email;
 			}
 
 			$set.isAdmin = isAdmin;
@@ -67,7 +81,13 @@
 	Meteor.publish('userData', function() {
 	  if(!this.userId) return null;
 	  return Meteor.users.find(this.userId, {fields: {
-	    isAdmin: 1,
-	    votes : 1
+	    isAdmin: 1
 	  }});
+	});
+
+	Meteor.publish("allUserData", function () {
+	    return Meteor.users.find({}, {fields: {
+		    votes: 1,
+		    profileLink: 1
+	    }});
 	});
