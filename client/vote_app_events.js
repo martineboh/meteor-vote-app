@@ -64,12 +64,20 @@ Template.vote.events({
 	'click .discardBallot' : function(){
 		if(Meteor.user().isAdmin){
 
-			console.log(this);
+			var service = "";
 
-			var answer = confirm("Are you sure you want to discard " + this.profile.name + "'s ballot?");
+			if(this.services.facebook){
+				service = 'Facebook';
+			} else if(this.services.twitter){
+				service = 'Twitter';
+			} else if(this.services.google){
+				service = 'Google';
+			}
+
+			var answer = confirm("Are you sure you want to discard " + this.profile.name + "'s "  + service + " Account ballot?");
 
 			if(answer){
-				// @TODO Remove user's votes
+				Meteor.call('discardBallot', this._id);
 			}
 		}
 	}
