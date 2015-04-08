@@ -80,29 +80,31 @@
 		},
 
 		discardBallot : function(userId){
-			var nomineeVotes = NomineeVotes.find({user : userId}),
-				user = Users.find(userId);
+			if(Meteor.user().isAdmin){
+				var nomineeVotes = NomineeVotes.find({user : userId}),
+					user = Users.find(userId);
 
-			nomineeVotes.forEach(function(nv, ix, arr){
-				var nominee = Nominees.findOne(nv.nominee);
+				nomineeVotes.forEach(function(nv, ix, arr){
+					var nominee = Nominees.findOne(nv.nominee);
 
-				if(nominee._id){
+					if(nominee._id){
 
-					var newVoteTotal = nominee.votes + (-1 * nv.votes);
+						var newVoteTotal = nominee.votes + (-1 * nv.votes);
 
-					// Remove Votes
-					Nominees.update(nv.nominee ,{$set : {votes: newVoteTotal}});
+						// Remove Votes
+						Nominees.update(nv.nominee ,{$set : {votes: newVoteTotal}});
 
-					// Remove NomineeVotes Obj
-					NomineeVotes.remove(nv._id);
-				}
-			});
+						// Remove NomineeVotes Obj
+						NomineeVotes.remove(nv._id);
+					}
+				});
 
-			// Reset User Votes
-			Users.update(
-				userId,
-				{ $set: {votes : Settings.findOne({name : 'votesPerUser'}).value }
-			});
+				// Reset User Votes
+				Users.update(
+					userId,
+					{ $set: {votes : Settings.findOne({name : 'votesPerUser'}).value }
+				});
+			}
 		}
 	});
 
