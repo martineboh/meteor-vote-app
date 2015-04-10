@@ -80,6 +80,20 @@ Template.vote.events({
 				Meteor.call('discardBallot', this._id);
 			}
 		}
+	},
+
+	'click #viewresults': function(){
+
+		$('#results, #changevotes').removeClass('hide');
+		$('#ballot, #viewresults').addClass('hide');
+
+	},
+
+	'click #changevotes': function(){
+
+		$('#results, #changevotes').addClass('hide');
+		$('#ballot, #viewresults').removeClass('hide');
+
 	}
 
 });

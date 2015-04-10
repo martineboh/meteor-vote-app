@@ -49,7 +49,7 @@ For more deployment options, see [http://docs.meteor.com/#/full/deploying](http:
 ## Todo
 - [x] Add Twitter login
 - [x] Add Google login
-- [ ] Hide results from user until all their votes have been cast
+- [x] Hide results from user until all their votes have been cast
 - [x] Show Admins all users who have cast votes (to discourage users from voting from multiple accounts)
 - [ ] Make ability to vote _against_ something adminable
 
