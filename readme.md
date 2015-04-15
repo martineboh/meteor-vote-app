@@ -3,7 +3,7 @@
 ## Configure Social Login apps
 
 ### Facebook
-Visit [https://developers.facebook.com](https://developers.facebook.com)  and set up an app with the Site URL set to http://localhost:3000/. Create a file called `private/local-settings.json` with App ID and App Secret of your Facebook app. See `local-settings.json.example` for a template. 
+Visit [https://developers.facebook.com](https://developers.facebook.com)  and set up an app with the Site URL set to http://localhost:3000/. Create a file called `private/local-settings.json` with App ID and App Secret of your Facebook app. See `local-settings.json.example` for a template.
 
 ### Twitter
 
@@ -51,5 +51,5 @@ For more deployment options, see [http://docs.meteor.com/#/full/deploying](http:
 - [x] Add Google login
 - [x] Hide results from user until all their votes have been cast
 - [x] Show Admins all users who have cast votes (to discourage users from voting from multiple accounts)
-- [ ] Make ability to vote _against_ something adminable
+- [x] Make ability to vote _against_ something adminable
 

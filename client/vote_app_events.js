@@ -18,9 +18,11 @@ Template.vote.events({
 
 	'click #reset' : function(e){
 		if(Meteor.user().isAdmin){
-			var setting = Settings.findOne({name : 'votesPerUser'});
+			var voteSetting = Settings.findOne({name : 'votesPerUser'}),
+				allowDownVoteSetting = Settings.findOne({name : 'allowDownVotes'});
 
-			Settings.update({_id : setting._id}, {$set : {value : parseInt($('#numbervotes').val(), 10) }});
+			Settings.update({_id : voteSetting._id}, {$set : {value : parseInt($('#numbervotes').val(), 10) }});
+			Settings.update({_id : allowDownVoteSetting._id}, {$set : {value : ($('#allowdownvotes').is(':checked') ? true : false) }});
 			Meteor.call('reset');
 		}
 	},

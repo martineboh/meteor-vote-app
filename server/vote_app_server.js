@@ -33,12 +33,18 @@
 
 			var	isAdmin = user.services.facebook ? admins.indexOf(user.services.facebook.id) > -1 : false,
 				$set = {},
-				voteSetting = Settings.findOne({name : 'votesPerUser'});
+				voteSetting = Settings.findOne({name : 'votesPerUser'}),
+				allowDownVoteSetting = Settings.findOne({name : 'allowDownVotes'});
 
 
 			if(!voteSetting){
 				Settings.insert({name : 'votesPerUser', value : 5});
 				voteSetting = Settings.findOne({name : 'votesPerUser'});
+			}
+
+			if(!allowDownVoteSetting){
+				Settings.insert({name : 'allowDownVotes', value : true});
+				allowDownVoteSetting = Settings.findOne({name : 'allowDownVotes'});
 			}
 
 			if(typeof user.votes == 'undefined'){

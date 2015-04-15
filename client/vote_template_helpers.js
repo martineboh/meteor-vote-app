@@ -52,6 +52,17 @@ Template.vote.helpers({
 
 	},
 
+	allowDownVotes : function(){
+		var setting = Settings.findOne({name : 'allowDownVotes'});
+
+		if(setting){
+			return setting.value;
+		} else {
+			return true;
+		}
+
+	},
+
 	userVotes : function(){
 		if(Meteor.user()){
 			return Meteor.user().votes;
@@ -86,7 +97,12 @@ Template.vote.helpers({
 	canVoteDown : function(){
 		if(Session.get("meteor_loggedin")){
 			var user = Meteor.user(),
-			nomineeVotes = NomineeVotes.findOne({nominee : this._id, user : user._id});
+				nomineeVotes = NomineeVotes.findOne({nominee : this._id, user : user._id}),
+				allowDownVotesSetting = Settings.findOne({name : 'allowDownVotes'});
+
+			if(nomineeVotes.votes < 1 && !allowDownVotesSetting.value){
+				return false;
+			}
 
 			if(user.votes > 0 ) return true;
 
@@ -95,6 +111,7 @@ Template.vote.helpers({
 			} else {
 				return false;
 			}
+
 		} else {
 			return false;
 		}

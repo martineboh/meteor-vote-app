@@ -124,12 +124,15 @@
 				<div class="form">
 					<div>
 						<label for="numbervotes">Votes Per User</label>
-						<input  id="numbervotes" type="number" min="0" value="{{ votesPerUser }}" />
+						<input  id="numbervotes" type="number" min="0" value="{{ votesPerUser }}">
 					</div>
-
 					<div>
-						<button id="reset" type="button">Reset Ballot <i class="fa fa-undo"></i></button>
+						<label for="allowdownvotes">Allow Down Votes</label>
+						<input id="allowdownvotes" type="checkbox" value="1" checked="{{ allowDownVotes }}">
 					</div>
+				</div>
+				<div>
+					<button id="reset" type="button">Reset Ballot <i class="fa fa-undo"></i></button>
 				</div>
 
 			</fieldset>
