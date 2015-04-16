@@ -39,6 +39,7 @@
 	fieldset h2 { border: none; text-align: center; }
 	legend { text-align: left; font-size: large; }
 	legend i { margin: 0 5px; }
+	fieldset .form { margin-bottom: 2em; }
 	fieldset .form div { display:inline-block; zoom:1; *display:inline; vertical-align: middle; border-left: 1px solid #ddd; padding: 0 1em; text-align: left; }
 	fieldset .form div:first-of-type { border-left: none; }
 	fieldset input[type="number"] { width: auto; }

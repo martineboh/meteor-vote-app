@@ -24,6 +24,10 @@ Template.vote.events({
 			Settings.update({_id : voteSetting._id}, {$set : {value : parseInt($('#numbervotes').val(), 10) }});
 			Settings.update({_id : allowDownVoteSetting._id}, {$set : {value : ($('#allowdownvotes').is(':checked') ? true : false) }});
 			Meteor.call('reset');
+
+			$('#results, #changevotes').addClass('hide');
+			$('#ballot, #viewresults').removeClass('hide');
+
 		}
 	},
 
@@ -89,12 +93,20 @@ Template.vote.events({
 		$('#results, #changevotes').removeClass('hide');
 		$('#ballot, #viewresults').addClass('hide');
 
+		setTimeout(function(){
+			$('html, body').stop().animate({scrollTop: $('#results').offset().top}, 500);
+		}, 10);
+
 	},
 
 	'click #changevotes': function(){
 
 		$('#results, #changevotes').addClass('hide');
 		$('#ballot, #viewresults').removeClass('hide');
+
+		setTimeout(function(){
+			$('html, body').stop().animate({scrollTop: $('#ballot').offset().top}, 500);
+		}, 10);
 
 	}
 
