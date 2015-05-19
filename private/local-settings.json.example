@@ -13,5 +13,13 @@
 			"consumerKey" : "###",
 			"secret"      : "###",
 			"loginStyle"  : "redirect"
+		},
+
+	"googleSettings" :
+		{
+			"service"     : "google",
+			"clientId"    : "###",
+			"secret"      : "###",
+			"loginStyle"  : "redirect"
 		}
 }
